@@ -9,6 +9,7 @@ import { FormsModule }    from '@angular/forms';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { HomeComponent } from './customer/home/home.component';
 import { AuthGuard } from './service/AuthGuard';
+import { HttpClientModule } from '@angular/common/http';
 export function tokenGetter() {
   return localStorage.getItem("jwt");
 }
@@ -24,6 +25,7 @@ export function tokenGetter() {
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     AppRoutingModule,
     JwtModule.forRoot({
       config: {
