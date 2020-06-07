@@ -10,6 +10,10 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { HomeComponent } from './customer/home/home.component';
 import { AuthGuard } from './service/AuthGuard';
 import { HttpClientModule } from '@angular/common/http';
+import { UserComponent } from './admin/user/user.component';
+import { CategoryComponent } from './admin/category/category.component';
+import { AdminHeaderComponent } from './admin/admin-header/admin-header.component';
+import { AllowAnonymous } from './service/AllowAnonymous';
 export function tokenGetter() {
   return localStorage.getItem("jwt");
 }
@@ -20,7 +24,11 @@ export function tokenGetter() {
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
-    HomeComponent
+    HomeComponent,
+    UserComponent,
+    CategoryComponent,
+    AdminHeaderComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -35,7 +43,7 @@ export function tokenGetter() {
       }
     })
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard,AllowAnonymous],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

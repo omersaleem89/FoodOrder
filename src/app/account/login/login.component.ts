@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/service/login.service';
 import { NgForm } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 
 @Component({
   selector: 'app-login',
@@ -8,7 +11,8 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(public service:LoginService) { }
+  constructor(public service:LoginService) {
+   }
 
   ngOnInit(): void {
     this.resetForm();
@@ -25,5 +29,5 @@ export class LoginComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.service.login();
   }
-
+  
 }

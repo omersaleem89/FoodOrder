@@ -3,9 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Login } from '../model/login';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { User } from '../model/user';
+import { CurrentUser } from '../model/currentUser';
 import { Role } from '../model/role';
-import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +12,7 @@ export class LoginService {
   formData: Login;
   invalidLogin: boolean = false;
   readonly rootURL = 'https://localhost:44378/api';
-  user: User = new User();
+  user: CurrentUser = new CurrentUser();
   tempRole: string = "";
   constructor(private jwtHelper: JwtHelperService, private http: HttpClient, private router: Router) {
   }
