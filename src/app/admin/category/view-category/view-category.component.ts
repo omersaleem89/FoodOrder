@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { CategoryService } from 'src/app/service/category.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { CategoryService } from 'src/app/service/category.service';
 })
 export class ViewCategoryComponent implements OnInit {
 
-  constructor(public service:CategoryService) { }
+  constructor(public service:CategoryService,@Inject('BASE_API_URL') public baseUrl: string ) { }
 
   ngOnInit(): void {
     this.service.refreshList();

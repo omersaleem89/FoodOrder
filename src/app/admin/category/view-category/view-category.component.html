@@ -8,7 +8,7 @@
     <tr *ngFor="let c of service.list; let i = index">
         <td>{{i+1}}</td>
         <td>{{c.Name}}</td>
-        <td>{{c.Image}}</td>
+        <td><img src="{{baseUrl + c.Image}}" height="50" width="50"/></td>
         <td><button class="btn btn-info" routerLink="/dashboard/category/editCategory/{{c.Id}}"> Edit</button></td>
     </tr>
 </table>
