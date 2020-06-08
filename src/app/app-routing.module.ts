@@ -9,6 +9,9 @@ import { Role } from './model/role';
 import { UserComponent } from './admin/user/user.component';
 import { CategoryComponent } from './admin/category/category.component';
 import { AllowAnonymous } from './service/AllowAnonymous';
+import { ViewCategoryComponent } from './admin/category/view-category/view-category.component';
+import { EditCategoryComponent } from './admin/category/edit-category/edit-category.component';
+import { AddCategoryComponent } from './admin/category/add-category/add-category.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent,canActivate:[AllowAnonymous] },
@@ -16,7 +19,11 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],data : {roles : [Role.Admin]}, children: [
     { path: 'user', component: UserComponent },
-    { path: 'category', component: CategoryComponent },
+    { path: 'category', component: CategoryComponent, children: [
+      { path: 'viewCategory', component: ViewCategoryComponent },
+      { path: 'addCategory', component: AddCategoryComponent },
+      { path: 'editCategory/:id', component: EditCategoryComponent }
+    ] },
   ] },
   
 ];

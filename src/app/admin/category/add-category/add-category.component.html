@@ -1,0 +1,13 @@
+<form (ngSubmit)="onSubmit()">      
+    <div>
+        <input type="text" name="Name"/>
+      </div>
+    <div>
+        <input #imageInput
+        type="file"
+        accept="image/*"
+        (change)="processFile(imageInput)">
+    </div>
+      <button type="submit">Upload</button>
+
+  </form>

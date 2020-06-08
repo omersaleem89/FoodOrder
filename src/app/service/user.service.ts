@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { User } from '../model/user.model';
 import { HttpClient } from '@angular/common/http';
 
@@ -6,11 +6,10 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UserService {
-  readonly rootURL = 'https://localhost:44378/api';
   list : User[];
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,@Inject('BASE_API_URL') private baseUrl: string) { }
   refreshList(){
-    this.http.get(this.rootURL + '/User')
+    this.http.get(this.baseUrl + '/User')
     .toPromise()
     .then(res => this.list = res as User[]);
 }

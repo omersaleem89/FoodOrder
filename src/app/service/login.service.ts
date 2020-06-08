@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Login } from '../model/login';
 import { Router } from '@angular/router';
@@ -11,14 +11,16 @@ import { Role } from '../model/role';
 export class LoginService {
   formData: Login;
   invalidLogin: boolean = false;
-  readonly rootURL = 'https://localhost:44378/api';
   user: CurrentUser = new CurrentUser();
   tempRole: string = "";
-  constructor(private jwtHelper: JwtHelperService, private http: HttpClient, private router: Router) {
+  constructor(private jwtHelper: JwtHelperService
+    , private http: HttpClient
+    , private router: Router
+    ,@Inject('BASE_API_URL') private baseUrl: string) {
   }
 
   login() {
-    return this.http.post(this.rootURL + '/Login', this.formData, {
+    return this.http.post(this.baseUrl + '/Login', this.formData, {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
       })
@@ -28,12 +30,12 @@ export class LoginService {
         let token = (<any>response).token;
         localStorage.setItem("jwt", token);
         this.invalidLogin = false;
-        console.log(this.formData);
+        //console.log(this.formData);
         this.user.Email = this.formData.Email;
         this.tempRole = this.jwtHelper.decodeToken(token)["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
         if (this.tempRole == Role.Admin) {
           this.user.Role = Role.Admin;
-          this.router.navigate(["dashboard"]);
+          this.router.navigate(["dashboard/user"]);
         }
         else {
           this.user.Role = Role.Customer;
