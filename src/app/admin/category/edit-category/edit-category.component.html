@@ -1,1 +1,35 @@
-<p>edit-category works!</p>
+<div class="row">
+    <div class="col-md-6">
+    <form (ngSubmit)="onSubmit()">      
+        <div>
+            <input type="text" class="form-control m-2" value="{{service.category.Name}}" name="name"  [(ngModel)]="service.category.Name"/>
+          </div>
+        <div>
+          <label class="image-upload-container">
+            <span>Select Image</span>
+            <input #imageInput
+                   type="file"
+                   accept="image/*"
+                   (change)="processFile(imageInput)">
+          </label>
+        </div>
+        <img src="{{baseUrl + service.category.Image}}" height="100" width="100"/>
+          <button class="btn btn-primary m-2" type="submit">Update</button>
+          <button class="btn btn-danger m-2" routerLink="/dashboard/category/viewCategory">Cancel</button>
+      </form>
+      <div *ngIf="selectedFile" class="img-preview-container">
+    
+        <div class="img-preview{{selectedFile.status === 'fail' ? '-error' : ''}}"
+             [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}">
+        </div>
+      
+        <div *ngIf="selectedFile.pending" class="img-loading-overlay">
+          <div class="img-spinning-circle"></div>
+        </div>
+      
+        <div *ngIf="selectedFile.status === 'ok'" class="alert alert-success"> Image Uploaded Succesfuly!</div>
+        <div *ngIf="selectedFile.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
+      </div>
+    </div>
+    <div class="col-md-6"></div>
+    </div>

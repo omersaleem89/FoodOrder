@@ -18,6 +18,7 @@ import { environment } from 'src/environments/environment';
 import { ViewCategoryComponent } from './admin/category/view-category/view-category.component';
 import { EditCategoryComponent } from './admin/category/edit-category/edit-category.component';
 import { AddCategoryComponent } from './admin/category/add-category/add-category.component';
+import { DeleteCategoryComponent } from './admin/category/delete-category/delete-category.component';
 export function tokenGetter() {
   return localStorage.getItem("jwt");
 }
@@ -35,6 +36,7 @@ export function tokenGetter() {
     ViewCategoryComponent,
     EditCategoryComponent,
     AddCategoryComponent,
+    DeleteCategoryComponent,
 
   ],
   imports: [

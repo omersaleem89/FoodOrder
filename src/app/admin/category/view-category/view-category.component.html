@@ -5,10 +5,14 @@
         <th>Image</th>
         <th>Action</th>
     </tr>
+    <tr *ngIf="service.list.length<1">
+        <td colspan="4" class="text-center">No Data Found</td>
+    </tr>
     <tr *ngFor="let c of service.list; let i = index">
         <td>{{i+1}}</td>
         <td>{{c.Name}}</td>
         <td><img src="{{baseUrl + c.Image}}" height="50" width="50"/></td>
-        <td><button class="btn btn-info" routerLink="/dashboard/category/editCategory/{{c.Id}}"> Edit</button></td>
+        <td><button class="btn btn-info" routerLink="/dashboard/category/editCategory/{{c.Id}}"> Edit</button>
+            <button class="btn btn-danger ml-2" routerLink="/dashboard/category/deleteCategory/{{c.Id}}"> Delete</button></td>
     </tr>
 </table>

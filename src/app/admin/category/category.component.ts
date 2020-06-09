@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from 'src/app/service/category.service';
 
 @Component({
   selector: 'app-category',
@@ -8,10 +7,15 @@ import { CategoryService } from 'src/app/service/category.service';
 })
 export class CategoryComponent implements OnInit {
 
-  constructor() { }
+  addButton:boolean = false;
+  constructor(){ }
 
   ngOnInit(): void {
 
   }
-
+  onActivate(componentReference) {
+    componentReference.btn.subscribe((data) => {
+      this.addButton=data;
+   })
+ }
 }

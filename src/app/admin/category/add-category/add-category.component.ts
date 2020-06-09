@@ -1,10 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { CategoryService } from 'src/app/service/category.service';
 import { Router } from '@angular/router';
+import { ImageSnippet } from 'src/app/service/image-snippet';
 
-class ImageSnippet {
-  constructor(public src: string, public file: File) {}
-}
+
 
 @Component({
   selector: 'app-add-category',
@@ -14,30 +13,51 @@ class ImageSnippet {
 export class AddCategoryComponent implements OnInit {
   selectedFile: ImageSnippet;
   name:string;
+  @Output() btn: EventEmitter<any> = new EventEmitter();
   constructor(public service: CategoryService,private router: Router) { }
 
   ngOnInit(): void {
-    
+    this.setAddButton(false);
+  }
+
+  setAddButton(data) {
+    // emit data to parent component
+    this.btn.emit(data);
   }
 
   onSubmit(){
-    
     this.service.postCategory(this.selectedFile.file,this.name).subscribe(
       (res) => {
-        this.service.refreshList();
-        this.router.navigate(["dashboard/category/viewCategory"]);
+        this.onSuccess();
       },
       (err) => {
-      
+        this.onError();
       })
+  }
+
+  private onSuccess() {
+    this.selectedFile.pending = false;
+    this.selectedFile.status = 'ok';
+    this.router.navigate(['/dashboard/category/viewCategory']);
+  }
+
+  private onError() {
+    this.selectedFile.pending = false;
+    this.selectedFile.status = 'fail';
+    this.selectedFile.src = '';
   }
 
   processFile(imageInput: any) {
     const file: File = imageInput.files[0];
     const reader = new FileReader();
+
     reader.addEventListener('load', (event: any) => {
+
       this.selectedFile = new ImageSnippet(event.target.result, file);
+
+      this.selectedFile.pending = true;
     });
+
     reader.readAsDataURL(file);
   }
 }

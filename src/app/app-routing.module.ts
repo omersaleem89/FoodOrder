@@ -12,6 +12,7 @@ import { AllowAnonymous } from './service/AllowAnonymous';
 import { ViewCategoryComponent } from './admin/category/view-category/view-category.component';
 import { EditCategoryComponent } from './admin/category/edit-category/edit-category.component';
 import { AddCategoryComponent } from './admin/category/add-category/add-category.component';
+import { DeleteCategoryComponent } from './admin/category/delete-category/delete-category.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent,canActivate:[AllowAnonymous] },
@@ -22,7 +23,8 @@ const routes: Routes = [
     { path: 'category', component: CategoryComponent, children: [
       { path: 'viewCategory', component: ViewCategoryComponent },
       { path: 'addCategory', component: AddCategoryComponent },
-      { path: 'editCategory/:id', component: EditCategoryComponent }
+      { path: 'editCategory/:id', component: EditCategoryComponent },
+      { path: 'deleteCategory/:id', component: DeleteCategoryComponent }
     ] },
   ] },
   
