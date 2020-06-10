@@ -1,34 +1,30 @@
 <div class="row">
   <div class="col-md-6">
     <div *ngIf="categoryForm.invalid && (categoryForm.dirty || categoryForm.touched)" class="alert alert-danger">
-      <div *ngIf= "categoryForm.controls.name.errors.required">
+      <div *ngIf= "categoryForm.controls.name.errors?.required">
         Name is required!
       </div>
-      <div *ngIf= "categoryForm.controls.FileUpload.errors.required">
+      <div *ngIf= "categoryForm.controls.FileUpload.errors?.required">
         File is required!
       </div>
     </div>
     <form [formGroup] = "categoryForm" (ngSubmit)="onSubmit()">
       <div>
-        <input type="text" class="form-control m-2" name="name" formControlName = "name" [(ngModel)]="name" required />
+        <input type="text" class="form-control m-2" name="name" formControlName = "name" />
       </div>
 
       <div>
         <label class="image-upload-container btn btn-bwm">
           <span>Select Image</span>
-          <input #imageInput formControlName = "FileUpload" type="file" accept="image/*" (change)="processFile(imageInput)" required >
+          <input  formControlName = "FileUpload" type="file" accept="image/*" (change)="processFile($event)" >
         </label>
       </div>
 
       <button class="btn btn-primary m-2" type="submit"  [disabled]="!categoryForm.valid">Save</button>
       <button class="btn btn-danger m-2" routerLink="/dashboard/category/viewCategory">Cancel</button>
     </form>
-    <div *ngIf="selectedFile">
-
-
-      <div *ngIf="selectedFile.status === 'ok'" class="alert alert-success"> Image Uploaded Succesfuly!</div>
-      <div *ngIf="selectedFile.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
-    </div>
+      <div *ngIf="status === 'ok'" class="alert alert-success"> Image Uploaded Succesfuly!</div>
+      <div *ngIf="status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
   </div>
   <div class="col-md-6"></div>
 </div>

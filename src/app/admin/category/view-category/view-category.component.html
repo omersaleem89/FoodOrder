@@ -5,8 +5,8 @@
         <th>Image</th>
         <th>Action</th>
     </tr>
-    <tr *ngIf="service.list.length<1">
-        <td colspan="4" class="text-center">No Data Found</td>
+    <tr *ngIf="service.list?.length < 1">
+        <td colspan="4" class="text-center"><h3>No Data Found</h3></td>
     </tr>
     <tr *ngFor="let c of service.list; let i = index">
         <td>{{i+1}}</td>

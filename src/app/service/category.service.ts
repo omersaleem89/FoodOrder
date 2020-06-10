@@ -20,11 +20,11 @@ export class CategoryService {
     .then(res => this.category = res as Category);
   }
   
-   postCategory(image: File, name : string){
+   postCategory(categoryForm:FormGroup){
     const formData = new FormData();
-    formData.append('Name', name);
-    formData.append('ImageFile', image);
-    formData.append('ImageFileThumb', image);
+    formData.append('Name', categoryForm.get('name').value);
+    formData.append('ImageFile', categoryForm.get('FileUpload').value);
+    formData.append('ImageFileThumb', categoryForm.get('FileUpload').value);
 
      return this.http.post(this.baseUrl + '/api/Category', formData);
    }
