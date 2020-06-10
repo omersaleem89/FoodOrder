@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { CategoryService } from 'src/app/service/category.service';
 import { Router } from '@angular/router';
 import { ImageSnippet } from 'src/app/service/image-snippet';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 
@@ -17,9 +18,16 @@ export class AddCategoryComponent implements OnInit {
   constructor(public service: CategoryService,private router: Router) { }
 
   ngOnInit(): void {
-    this.setAddButton(false);
+    this.setAddButton(false)
+    
   }
-
+  categoryForm = new FormGroup({
+    "name": new FormControl('', [
+      Validators.required
+    ]),
+    "FileUpload":  new FormControl("",
+    [Validators.required])
+  })
   setAddButton(data) {
     // emit data to parent component
     this.btn.emit(data);

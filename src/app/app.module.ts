@@ -42,6 +42,7 @@ export function tokenGetter() {
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
     JwtModule.forRoot({
