@@ -10,23 +10,23 @@ import { CategoryService } from 'src/app/service/category.service';
   styleUrls: ['./add-food-item.component.css']
 })
 export class AddFoodItemComponent implements OnInit {
-  status: string = 'init';
+  constructor(public serviceCategory: CategoryService, public service: FoodItemService, private router: Router) { }
+  status = 'init';
   @Output() btn: EventEmitter<any> = new EventEmitter();
-  constructor(public serviceCategory: CategoryService,public service: FoodItemService,private router: Router) { }
+
+  foodItemForm = new FormGroup({
+    Name: new FormControl('', [Validators.required]),
+    ImageFile:  new FormControl('', [Validators.required]),
+    Description:  new FormControl('', [Validators.required]),
+    Price:  new FormControl('', [Validators.required, Validators.min(1), Validators.pattern('^[0-9]*$')], ),
+    Quantity:  new FormControl('', [Validators.required, Validators.min(1), Validators.pattern('^[0-9]*$')]),
+    CategoryId:  new FormControl('', [Validators.required])
+  });
 
   ngOnInit(): void {
     this.setAddButton(false);
     this.serviceCategory.refreshList();
   }
-
-  foodItemForm = new FormGroup({
-    "Name": new FormControl('', [Validators.required]),
-    "ImageFile":  new FormControl("",[Validators.required]),
-    "Description":  new FormControl("",[Validators.required]),
-    "Price":  new FormControl("",[Validators.required,Validators.min(1),Validators.pattern("^[0-9]*$")],),
-    "Quantity":  new FormControl("",[Validators.required,Validators.min(1),Validators.pattern("^[0-9]*$")]),
-    "CategoryId":  new FormControl("",[Validators.required])
-  })
 
   setAddButton(data) {
     // emit data to parent component
@@ -40,7 +40,7 @@ export class AddFoodItemComponent implements OnInit {
       },
       (err) => {
         this.onError();
-      })
+      });
   }
 
   private onSuccess() {
