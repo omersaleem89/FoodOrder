@@ -3,15 +3,20 @@
 <div class="row">
   <nav class="col-md-2 d-none d-md-block bg-light sidebar">
     <div class="sidebar-sticky">
-      <ul class="nav flex-column">
+      <ul class="nav nav-pills nav-fill flex-column mt-2">
         <li class="nav-item">
-          <a class="nav-link active" routerLink="/dashboard/user">
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/dashboard/user">
             User
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/dashboard/category/viewCategory">
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/dashboard/category/viewCategory">
             Category
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/dashboard/foodItem/viewFoodItem">
+            Food Item
           </a>
         </li>
       </ul>

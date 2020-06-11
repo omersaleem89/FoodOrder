@@ -1,18 +1,25 @@
+<div class="card">
 <table class="table table-hover table-stripped">
+    <thead class="thead-dark">
     <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Image</th>
-        <th>Action</th>
+        
+        <th class="align-middle text-center">#</th>
+        <th class="align-middle text-center">Name</th>
+        <th class="align-middle text-center">Image</th>
+        <th class="align-middle text-center">Action</th>
     </tr>
+</thead>
+<tbody>
     <tr *ngIf="service.list?.length < 1">
         <td colspan="4" class="text-center"><h3>No Data Found</h3></td>
     </tr>
-    <tr *ngFor="let c of service.list; let i = index">
-        <td>{{i+1}}</td>
-        <td>{{c.Name}}</td>
-        <td><img src="{{baseUrl + c.Image}}" height="50" width="50"/></td>
-        <td><button class="btn btn-info" routerLink="/dashboard/category/editCategory/{{c.Id}}"> Edit</button>
-            <button class="btn btn-danger ml-2" routerLink="/dashboard/category/deleteCategory/{{c.Id}}"> Delete</button></td>
+    <tr *ngFor="let c of service.list; let i = index" class="m-0 p-0">
+        <td class="align-middle text-center">{{i+1}}</td>
+        <td class="align-middle text-center">{{c.Name}}</td>
+        <td class="align-middle text-center"><img src="{{baseUrl + c.Image}}" height="50" width="50"/></td>
+        <td class="align-middle text-center"><button class="btn btn-info" routerLink="/dashboard/category/editCategory/{{c.Id}}"><i class="fa fa-edit"></i> Edit</button>
+            <button class="btn btn-danger ml-2" routerLink="/dashboard/category/deleteCategory/{{c.Id}}"><i class="fa fa-trash"></i> Delete</button></td>
     </tr>
+</tbody>
 </table>
+</div>

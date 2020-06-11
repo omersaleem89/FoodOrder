@@ -1,7 +1,6 @@
-import { Component, OnInit, Inject, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CategoryService } from 'src/app/service/category.service';
 import { Router } from '@angular/router';
-import { ImageSnippet } from 'src/app/service/image-snippet';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 

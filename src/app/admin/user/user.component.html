@@ -1,15 +1,20 @@
 <h3>User</h3>
+<div class="card">
 <table class="table table-hover table-stripped">
+    <thead class="thead-dark">
     <tr>
-        <th>#</th>
-        <th>Email</th>
-        <th>Password</th>
-        <th>Role</th>
+        <th class="align-middle text-center">#</th>
+        <th class="align-middle text-center">Email</th>
+        <th class="align-middle text-center">Password</th>
+        <th class="align-middle text-center">Role</th>
     </tr>
+</thead>
+<tbody>
     <tr *ngFor="let u of service.list; let i = index">
-        <td>{{i+1}}</td>
-        <td>{{u.Email}}</td>
-        <td>{{u.Password}}</td>
-        <td>{{u.Role}}</td>
+        <td class="align-middle text-center">{{i+1}}</td>
+        <td class="align-middle text-center">{{u.Email}}</td>
+        <td class="align-middle text-center">{{u.Password}}</td>
+        <td class="align-middle text-center">{{u.Role}}</td>
     </tr>
-</table>
+</tbody>
+</table></div>

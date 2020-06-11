@@ -1,0 +1,10 @@
+<div class="row">
+    <h3 class="col">Food Item</h3>
+    <div *ngIf="addButton" class="col-2 d-flex justify-content-end ">
+    <button  class="btn btn-primary mb-1" routerLink="/dashboard/foodItem/addFoodItem"><i class="fa fa-plus"></i> Add</button>
+    </div>
+    </div>
+    
+    <router-outlet (activate)="onActivate($event)"></router-outlet>
+    
+    

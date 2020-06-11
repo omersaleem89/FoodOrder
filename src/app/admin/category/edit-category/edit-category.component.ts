@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, Input, Output, EventEmitter } from '@angular/core';
 import { CategoryService } from 'src/app/service/category.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ImageSnippet } from 'src/app/service/image-snippet';
+import { Validators, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-category',
@@ -9,7 +9,7 @@ import { ImageSnippet } from 'src/app/service/image-snippet';
   styleUrls: ['./edit-category.component.css']
 })
 export class EditCategoryComponent implements OnInit {
-  selectedFile: ImageSnippet;
+  status: string = 'init';
   @Output() btn: EventEmitter<any> = new EventEmitter();
   id: number;
   constructor(private route: ActivatedRoute,
@@ -21,6 +21,14 @@ export class EditCategoryComponent implements OnInit {
     this.getCategory();
   }
 
+  categoryForm = new FormGroup({
+    "name": new FormControl('', [
+      Validators.required
+    ]),
+    "FileUpload":  new FormControl("",
+    [Validators.required])
+  })
+
   setAddButton(data) {
     // emit data to parent component
     this.btn.emit(data);
@@ -31,50 +39,33 @@ export class EditCategoryComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.selectedFile != null) {
-      this.service.putCategory(this.selectedFile.file, this.service.category.Name, this.id).subscribe(
+
+      this.service.putCategory(this.categoryForm, this.id).subscribe(
         (res) => {
           this.onSuccess();
         },
         (err) => {
           this.onError();
         });
-    }
-    else{
-      this.service.putCategory(null, this.service.category.Name, this.id).subscribe(
-        (res) => {
-          this.onSuccess();
-        },
-        (err) => {
-          this.onError();
-        });
-    }
+
   }
 
   private onSuccess() {
-    this.selectedFile.pending = false;
-    this.selectedFile.status = 'ok';
+    this.status = 'ok';
     this.router.navigate(['/dashboard/category/viewCategory']);
   }
 
   private onError() {
-    this.selectedFile.pending = false;
-    this.selectedFile.status = 'fail';
-    this.selectedFile.src = '';
+    this.status = 'fail';
   }
 
-  processFile(imageInput: any) {
-    const file: File = imageInput.files[0];
-    const reader = new FileReader();
-
-    reader.addEventListener('load', (event: any) => {
-
-      this.selectedFile = new ImageSnippet(event.target.result, file);
-
-      this.selectedFile.pending = true;
-    });
-
-    reader.readAsDataURL(file);
+  processFile(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.categoryForm.patchValue({
+        FileUpload: file
+      });
+    }
   }
 
 }

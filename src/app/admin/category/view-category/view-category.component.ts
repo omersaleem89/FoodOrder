@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { CategoryService } from 'src/app/service/category.service';
 
 @Component({
