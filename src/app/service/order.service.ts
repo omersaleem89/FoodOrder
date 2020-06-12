@@ -26,7 +26,9 @@ export class OrderService {
   }
   putOrder(id: number){
     const formData = new FormData();
-    formData.append('Status', this.order.Status + '');
+    formData.append('Status', `${this.order.Status}`);
+    formData.append('CreationDate', `${this.order.CreationDate}`);
+    formData.append('TransId', `${this.order.TransId}`);
     formData.append('TotalPrice', this.order.TotalPrice.toString());
     formData.append('UserId', this.order.UserId.toString());
     return this.http.put(this.baseUrl + '/api/Order/' + id, formData);
