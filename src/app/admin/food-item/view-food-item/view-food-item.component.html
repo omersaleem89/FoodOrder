@@ -2,7 +2,7 @@
     <table class="table table-hover table-stripped">
         <thead class="thead-dark">
         <tr>
-            
+
             <th class="align-middle text-center">#</th>
             <th class="align-middle text-center">Name</th>
             <th class="align-middle text-center">Image</th>
@@ -15,7 +15,7 @@
     </thead>
     <tbody>
         <tr *ngIf="service.list?.length < 1">
-            <td colspan="4" class="text-center"><h3>No Data Found</h3></td>
+            <td colspan="8" class="text-center"><h3>No Data Found</h3></td>
         </tr>
         <tr *ngFor="let f of service.list; let i = index" class="m-0 p-0">
             <td class="align-middle text-center">{{i+1}}</td>
@@ -24,7 +24,8 @@
             <td class="align-middle text-center">{{f.Description}}</td>
             <td class="align-middle text-center">Rs. {{f.Price}}/-</td>
             <td class="align-middle text-center">{{f.Quantity}}</td>
-            <td *ngIf="f.IsEnabled" class="align-middle text-center"><label class="badge badge-success">Enabled</label></td>
+            <td *ngIf="f.IsEnabled" class="align-middle text-center"><label class="badge badge-pill badge-success">Enabled</label></td>
+            <td *ngIf="!f.IsEnabled" class="align-middle text-center"><label class="badge badge-pill badge-danger">Disabled</label></td>
             <td class="align-middle text-center"><button class="btn btn-info" routerLink="/dashboard/foodItem/editFoodItem/{{f.Id}}"><i class="fa fa-edit"></i> Edit</button>
                 <button class="btn btn-danger ml-2" routerLink="/dashboard/foodItem/deleteFoodItem/{{f.Id}}"><i class="fa fa-trash"></i> Delete</button></td>
         </tr>

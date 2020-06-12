@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class DeleteCategoryComponent implements OnInit {
   id: number;
   @Output() btn: EventEmitter<any> = new EventEmitter();
-  constructor(private route: ActivatedRoute,public service: CategoryService, private router:Router) { }
+  constructor(private route: ActivatedRoute, public service: CategoryService, private router: Router) { }
 
   ngOnInit(): void {
     this.setAddButton(false);

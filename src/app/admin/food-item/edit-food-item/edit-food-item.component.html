@@ -1,1 +1,62 @@
-<p>edit-food-item works!</p>
+<div class="row">
+  <div class="col-md-6">
+      <div *ngIf="foodItemForm.invalid && (foodItemForm.dirty || foodItemForm.touched)"
+          class="alert alert-danger  ml-2">
+          <div *ngIf="foodItemForm.controls.CategoryId.errors?.required">
+              Category is required!
+          </div>
+          <div *ngIf="foodItemForm.controls.Name.errors?.required">
+              Name is required!
+          </div>
+          <div *ngIf="foodItemForm.controls.Description.errors?.required">
+              Description is required!
+          </div>
+          <div *ngIf="foodItemForm.controls.Price.errors?.required">
+              Price is required!
+          </div>
+          <div *ngIf="foodItemForm.controls.Quantity.errors?.required">
+              Quantity is required!
+          </div>
+          <div *ngIf="foodItemForm.controls.ImageFile.errors?.required">
+              Image is required!
+          </div>
+      </div>
+      <form [formGroup]="foodItemForm" (ngSubmit)="onSubmit()">
+          <select formControlName="CategoryId" class="form-control ml-2">
+              <option value="" disabled selected>Select Category</option>
+              <option *ngFor="let c of serviceCategory.list" [value]="c.Id">{{c.Name}}</option>
+            </select>
+          <div>
+              <input type="text" placeholder="Name" class="form-control m-2" formControlName="Name"/>
+          </div>
+          <div>
+              <input type="text" placeholder="Description" class="form-control m-2" formControlName="Description"/>
+          </div>
+          <div>
+              <input type="number" placeholder="Price" class="form-control m-2" formControlName="Price"/>
+          </div>
+          <div>
+              <input type="number" placeholder="Quantity" class="form-control m-2" formControlName="Quantity"/>
+          </div>
+          <div class="custom-control custom-switch ml-2 m-2">
+            <input type="checkbox" class="custom-control-input" formControlName="IsEnabled" id="switch1"/>
+            <label class="custom-control-label" for="switch1"> Enable/Disable</label>
+        </div>
+          <div class="custom-file ml-2">
+              <input formControlName="ImageFile" class="custom-file-input" type="file" accept="image/*"
+                  (change)="processFile($event)">
+              <label class="custom-file-label">Choose file...</label>
+          </div>
+
+          <button class="btn btn-primary m-2" type="submit" [disabled]="!foodItemForm.valid"><i
+                  class="fa fa-save"></i> Update</button>
+          <button class="btn btn-danger m-2" routerLink="/dashboard/foodItem/viewFoodItem"><i class="fa fa-times"></i>
+              Cancel</button>
+      </form>
+      <div *ngIf="status === 'ok'" class="alert alert-success"> Image Uploaded Succesfuly!</div>
+      <div *ngIf="status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
+  </div>
+  <div class="col-md-6">
+    <img src="{{baseUrl + service.foodItem.Image}}" height="100" width="100" />
+  </div>
+</div>

@@ -7,40 +7,40 @@ import { FormGroup } from '@angular/forms';
   providedIn: 'root'
 })
 export class CategoryService {
-  list : Category[];
-  category: Category = new Category();
-  constructor(private http: HttpClient,@Inject('BASE_API_URL') private baseUrl: string) {
+  list: Category[];
+  category: Category;
+  constructor(private http: HttpClient, @Inject('BASE_API_URL') private baseUrl: string) {
    }
-  
+
   getCategory(id){
-    this.http.get(this.baseUrl + '/api/Category/'+id)
+    this.http.get(this.baseUrl + '/api/Category/' + id)
     .toPromise()
     .then(res => {
       this.category = res as Category;
     });
   }
-  
-   postCategory(categoryForm:FormGroup){
+
+   postCategory(categoryForm: FormGroup){
     const formData = new FormData();
     formData.append('Name', categoryForm.get('name').value);
     formData.append('ImageFile', categoryForm.get('FileUpload').value);
     formData.append('ImageFileThumb', categoryForm.get('FileUpload').value);
 
-     return this.http.post(this.baseUrl + '/api/Category', formData);
+    return this.http.post(this.baseUrl + '/api/Category', formData);
    }
 
-   putCategory(categoryForm:FormGroup, id:number){
+   putCategory(categoryForm: FormGroup, id: number){
     const formData = new FormData();
     formData.append('Id', id.toString());
     formData.append('Name', categoryForm.get('name').value);
     formData.append('ImageFile', categoryForm.get('FileUpload').value);
     formData.append('ImageFileThumb', categoryForm.get('FileUpload').value);
 
-     return this.http.put(this.baseUrl + '/api/Category', formData);
+    return this.http.put(this.baseUrl + '/api/Category', formData);
    }
 
-   deleteCategory(id:number){
-    return this.http.delete(this.baseUrl + '/api/Category/'+id);
+   deleteCategory(id: number){
+    return this.http.delete(this.baseUrl + '/api/Category/' + id);
    }
 
 

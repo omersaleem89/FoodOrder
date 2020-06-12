@@ -1,6 +1,6 @@
-export class Category {
-    Id:number;
+export interface Category {
+    Id: number;
     Name: string;
-    Image : string;
-    ImageThumb : string;
+    Image: string;
+    ImageThumb: string;
 }

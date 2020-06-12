@@ -4,11 +4,11 @@ import {LoginComponent} from './account/login/login.component';
 import {RegisterComponent} from './account/register/register.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { HomeComponent } from './customer/home/home.component';
-import { AuthGuard } from './service/AuthGuard';
-import { Role } from './model/role';
+import { AuthGuard } from './shared/auth-guard';
+import { Role } from './shared/role';
 import { UserComponent } from './admin/user/user.component';
 import { CategoryComponent } from './admin/category/category.component';
-import { AllowAnonymous } from './service/AllowAnonymous';
+import { AllowAnonymous } from './shared/allow-anonymous';
 import { ViewCategoryComponent } from './admin/category/view-category/view-category.component';
 import { EditCategoryComponent } from './admin/category/edit-category/edit-category.component';
 import { AddCategoryComponent } from './admin/category/add-category/add-category.component';
@@ -18,12 +18,15 @@ import { ViewFoodItemComponent } from './admin/food-item/view-food-item/view-foo
 import { AddFoodItemComponent } from './admin/food-item/add-food-item/add-food-item.component';
 import { EditFoodItemComponent } from './admin/food-item/edit-food-item/edit-food-item.component';
 import { DeleteFoodItemComponent } from './admin/food-item/delete-food-item/delete-food-item.component';
+import { OrderComponent } from './admin/order/order.component';
+import { OrderDetailComponent } from './admin/order/order-detail/order-detail.component';
+import { ViewOrderComponent } from './admin/order/view-order/view-order.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent,canActivate:[AllowAnonymous] },
-  { path: 'register', component: RegisterComponent,canActivate:[AllowAnonymous] },
+  { path: 'login', component: LoginComponent, canActivate: [AllowAnonymous] },
+  { path: 'register', component: RegisterComponent, canActivate: [AllowAnonymous] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],data : {roles : [Role.Admin]}, children: [
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], data : {roles : [Role.Admin]}, children: [
     { path: 'user', component: UserComponent },
     { path: 'category', component: CategoryComponent, children: [
       { path: 'viewCategory', component: ViewCategoryComponent },
@@ -37,8 +40,12 @@ const routes: Routes = [
       { path: 'editFoodItem/:id', component: EditFoodItemComponent },
       { path: 'deleteFoodItem/:id', component: DeleteFoodItemComponent }
     ] },
+    { path: 'order', component: OrderComponent, children: [
+      { path: 'viewOrder', component: ViewOrderComponent },
+      { path: 'orderDetail/:id', component: OrderDetailComponent }
+    ] }
   ] },
-  
+
 ];
 
 @NgModule({

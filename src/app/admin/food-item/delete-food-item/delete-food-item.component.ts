@@ -24,7 +24,8 @@ export class DeleteFoodItemComponent implements OnInit {
 
   getFoodItem(): void {
     this.id = +this.route.snapshot.paramMap.get('id');
-    this.service.getFoodItem(this.id);
+    this.service.getFoodItem(this.id).subscribe((res) => {
+    });
   }
 
   deleteFoodItem(){

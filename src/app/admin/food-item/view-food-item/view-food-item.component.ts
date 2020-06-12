@@ -8,7 +8,7 @@ import { FoodItemService } from 'src/app/service/food-item.service';
 })
 export class ViewFoodItemComponent implements OnInit {
   @Output() btn: EventEmitter<any> = new EventEmitter();
-  constructor(public service:FoodItemService,@Inject('BASE_API_URL') public baseUrl: string ) { }
+  constructor(public service: FoodItemService, @Inject('BASE_API_URL') public baseUrl: string ) { }
 
   ngOnInit(): void {
     this.setAddButton(true);

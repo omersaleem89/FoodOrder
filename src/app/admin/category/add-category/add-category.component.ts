@@ -11,23 +11,23 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./add-category.component.css']
 })
 export class AddCategoryComponent implements OnInit {
+  constructor(public service: CategoryService, private router: Router) { }
  // selectedFile: ImageSnippet;
-  
-  status: string = 'init';
-  @Output() btn: EventEmitter<any> = new EventEmitter();
-  constructor(public service: CategoryService,private router: Router) { }
 
-  ngOnInit(): void {
-    this.setAddButton(false)
-    
-  }
+  status = 'init';
+  @Output() btn: EventEmitter<any> = new EventEmitter();
   categoryForm = new FormGroup({
-    "name": new FormControl('', [
+    name: new FormControl('', [
       Validators.required
     ]),
-    "FileUpload":  new FormControl("",
+    FileUpload:  new FormControl('',
     [Validators.required])
-  })
+  });
+
+  ngOnInit(): void {
+    this.setAddButton(false);
+
+  }
   setAddButton(data) {
     // emit data to parent component
     this.btn.emit(data);
@@ -39,7 +39,7 @@ export class AddCategoryComponent implements OnInit {
       },
       (err) => {
         this.onError();
-      })
+      });
   }
 
   private onSuccess() {
