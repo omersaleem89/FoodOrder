@@ -9,25 +9,25 @@ import { Validators, FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./edit-category.component.css']
 })
 export class EditCategoryComponent implements OnInit {
-  status: string = 'init';
+  constructor(private route: ActivatedRoute,
+              public service: CategoryService, private router: Router, @Inject('BASE_API_URL') public baseUrl: string) {
+  }
+  status = 'init';
   @Output() btn: EventEmitter<any> = new EventEmitter();
   id: number;
-  constructor(private route: ActivatedRoute,
-    public service: CategoryService, private router:Router,@Inject('BASE_API_URL') public baseUrl: string) {
-  }
+
+  categoryForm = new FormGroup({
+    name: new FormControl('', [
+      Validators.required
+    ]),
+    FileUpload:  new FormControl('',
+    [Validators.required])
+  });
 
   ngOnInit(): void {
     this.setAddButton(false);
     this.getCategory();
   }
-
-  categoryForm = new FormGroup({
-    "name": new FormControl('', [
-      Validators.required
-    ]),
-    "FileUpload":  new FormControl("",
-    [Validators.required])
-  })
 
   setAddButton(data) {
     // emit data to parent component
