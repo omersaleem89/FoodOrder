@@ -3,6 +3,7 @@ import { Order } from '../model/order.model';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { OrderDetail } from '../model/order-detail.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,14 @@ export class OrderService {
   constructor(private http: HttpClient, @Inject('BASE_API_URL') private baseUrl: string) { }
   list: Order[];
   order: Order;
+  orderDetail: OrderDetail[];
+
+  getOrderDetail(id){
+    this.http.get(this.baseUrl + '/api/Order/GetOrderDetails/' + id)
+    .toPromise()
+    .then(res => this.orderDetail = res as OrderDetail[]);
+  }
+
   refreshList() {
     this.http.get(this.baseUrl + '/api/Order')
       .toPromise()
@@ -39,7 +48,7 @@ export class OrderService {
       (res) => {
         this.order.Status = true;
         this.putOrder(id).subscribe(
-          (res) => {
+          () => {
            this.refreshList();
           },
             (err) => {

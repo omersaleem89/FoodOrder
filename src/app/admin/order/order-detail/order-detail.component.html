@@ -1,1 +1,35 @@
-<p>order-detail works!</p>
+<div class="row m-2">
+  <div class="col">
+  <h6 class="mt-0 mb-0">Order No. {{service.orderDetail[0].OrderId}}</h6>
+</div>
+<div class="col d-flex justify-content-end">
+  <button class="btn btn-danger"  routerLinkActive="active-link" routerLink="/dashboard/order/viewOrder">Go Back</button>
+</div>
+</div>
+<div class="card">
+  <table class="table table-hover table-stripped">
+      <thead class="thead-dark">
+      <tr>
+
+          <th class="align-middle text-center">#</th>
+          <th class="align-middle text-center">Name</th>
+          <th class="align-middle text-center">Image</th>
+          <th class="align-middle text-center">Quantity</th>
+          <th class="align-middle text-center">Price</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngIf="service.orderDetail?.length < 1">
+          <td colspan="8" class="text-center"><h3>No Data Found</h3></td>
+      </tr>
+      <tr *ngFor="let od of service.orderDetail; let i = index" class="m-0 p-0">
+          <td class="align-middle text-center">{{i+1}}</td>
+          <td class="align-middle text-center">{{od.Name}}</td>
+          <td class="align-middle text-center"><img src="{{baseUrl + od.Image}}" height="50" width="50"/></td>
+          <td class="align-middle text-center">{{od.Quantity}}</td>
+          <td class="align-middle text-center">Rs. {{od.Price}}/-</td>
+      </tr>
+  </tbody>
+  </table>
+  </div>
+

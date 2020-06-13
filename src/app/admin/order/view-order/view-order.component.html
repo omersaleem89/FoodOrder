@@ -21,7 +21,7 @@
       <tr *ngFor="let o of service.list; let i = index" class="m-0 p-0">
         <td class="align-middle text-center">{{i+1}}</td>
         <td class="align-middle text-center">{{o.Email}}</td>
-        <td class="align-middle text-center">{{o.CreationDate}}</td>
+        <td class="align-middle text-center">{{o.CreationDate | date: 'MMM d, y'}}</td>
         <td class="align-middle text-center">Rs. {{o.TotalPrice}}/-</td>
         <td class="align-middle text-center">{{o.TransId}}</td>
         <td *ngIf="o.Status" class="align-middle text-center"><label
