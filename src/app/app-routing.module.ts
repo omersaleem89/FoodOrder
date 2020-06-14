@@ -21,8 +21,8 @@ import { DeleteFoodItemComponent } from './admin/food-item/delete-food-item/dele
 import { OrderComponent } from './admin/order/order.component';
 import { OrderDetailComponent } from './admin/order/order-detail/order-detail.component';
 import { ViewOrderComponent } from './admin/order/view-order/view-order.component';
+import { NotFoundComponent } from './shared/not-found/not-found.component';
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate: [AllowAnonymous] },
   { path: 'register', component: RegisterComponent, canActivate: [AllowAnonymous] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
@@ -45,7 +45,8 @@ const routes: Routes = [
       { path: 'orderDetail/:id', component: OrderDetailComponent }
     ] }
   ] },
-
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', component: NotFoundComponent},
 ];
 
 @NgModule({

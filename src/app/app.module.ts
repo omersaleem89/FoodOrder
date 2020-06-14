@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { HomeComponent } from './customer/home/home.component';
 import { AuthGuard } from './shared/auth-guard';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserComponent } from './admin/user/user.component';
 import { CategoryComponent } from './admin/category/category.component';
 import { AdminHeaderComponent } from './admin/admin-header/admin-header.component';
@@ -27,6 +27,8 @@ import { AddFoodItemComponent } from './admin/food-item/add-food-item/add-food-i
 import { OrderComponent } from './admin/order/order.component';
 import { OrderDetailComponent } from './admin/order/order-detail/order-detail.component';
 import { ViewOrderComponent } from './admin/order/view-order/view-order.component';
+import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { AuthInterceptor } from './shared/auth-interceptor';
 export function tokenGetter() {
   return localStorage.getItem('jwt');
 }
@@ -53,6 +55,7 @@ export function tokenGetter() {
     OrderComponent,
     OrderDetailComponent,
     ViewOrderComponent,
+    NotFoundComponent,
 
   ],
   imports: [
@@ -69,7 +72,12 @@ export function tokenGetter() {
       }
     })
   ],
-  providers: [AuthGuard, AllowAnonymous, { provide: 'BASE_API_URL', useValue: environment.apiUrl }],
+  providers: [
+    AuthGuard,
+    AllowAnonymous,
+    { provide: 'BASE_API_URL', useValue: environment.apiUrl },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
