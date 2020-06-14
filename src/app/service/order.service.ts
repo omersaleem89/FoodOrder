@@ -39,7 +39,7 @@ export class OrderService {
       (res) => {
         this.order.Status = true;
         this.putOrder(id).subscribe(
-          (res) => {
+          () => {
            this.refreshList();
           },
             (err) => {
