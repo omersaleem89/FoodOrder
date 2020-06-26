@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from './account/login/login.component';
 import {RegisterComponent} from './account/register/register.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
-import { HomeComponent } from './customer/home/home.component';
 import { AuthGuard } from './shared/auth-guard';
 import { Role } from './shared/role';
 import { UserComponent } from './admin/user/user.component';
@@ -25,7 +24,6 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [AllowAnonymous] },
   { path: 'register', component: RegisterComponent, canActivate: [AllowAnonymous] },
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], data : {roles : [Role.Admin]}, children: [
     { path: 'user', component: UserComponent },
     { path: 'category', component: CategoryComponent, children: [
@@ -45,6 +43,7 @@ const routes: Routes = [
       { path: 'orderDetail/:id', component: OrderDetailComponent }
     ] }
   ] },
+  { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule)  },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent},
 ];

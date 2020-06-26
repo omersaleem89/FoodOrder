@@ -5,19 +5,19 @@ import { Component, OnInit, ChangeDetectorRef, AfterContentChecked } from '@angu
   templateUrl: './food-item.component.html',
   styleUrls: ['./food-item.component.css']
 })
-export class FoodItemComponent implements OnInit,AfterContentChecked {
-  addButton:boolean = false;
-  constructor(private changeDetector:ChangeDetectorRef) { }
+export class FoodItemComponent implements OnInit, AfterContentChecked {
+  addButton = false;
+  constructor(private changeDetector: ChangeDetectorRef) { }
 
   ngOnInit(): void {
   }
   onActivate(componentReference) {
     componentReference.btn.subscribe((data) => {
-      this.addButton=data;
-   })
+      this.addButton = data;
+   });
  }
 
- ngAfterContentChecked() : void {
+ ngAfterContentChecked(): void {
   this.changeDetector.detectChanges();
 }
 }

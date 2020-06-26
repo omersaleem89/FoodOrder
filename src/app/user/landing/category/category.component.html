@@ -1,0 +1,7 @@
+<h2 class="mt-3 mb-2">Categories</h2>
+    <div class="row">
+      <div *ngFor="let c of service.list" class="col-lg-4 text-center" >
+        <img style="cursor: pointer;" class="rounded-circle" src="{{baseUrl + c.Image}}" alt="Generic placeholder image" width="140" height="140" routerLink="/user/home/categoryItem/{{c.Id}}">
+        <h2 style="cursor: pointer;" routerLink="/user/home/categoryItem/{{c.Id}}">{{c.Name}}</h2>
+      </div>
+    </div>

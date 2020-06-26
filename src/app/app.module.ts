@@ -7,12 +7,10 @@ import { LoginComponent } from './account/login/login.component';
 import { RegisterComponent } from './account/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
-import { HomeComponent } from './customer/home/home.component';
 import { AuthGuard } from './shared/auth-guard';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserComponent } from './admin/user/user.component';
 import { CategoryComponent } from './admin/category/category.component';
-import { AdminHeaderComponent } from './admin/admin-header/admin-header.component';
 import { AllowAnonymous } from './shared/allow-anonymous';
 import { environment } from 'src/environments/environment';
 import { ViewCategoryComponent } from './admin/category/view-category/view-category.component';
@@ -27,8 +25,8 @@ import { AddFoodItemComponent } from './admin/food-item/add-food-item/add-food-i
 import { OrderComponent } from './admin/order/order.component';
 import { OrderDetailComponent } from './admin/order/order-detail/order-detail.component';
 import { ViewOrderComponent } from './admin/order/view-order/view-order.component';
-import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { AuthInterceptor } from './shared/auth-interceptor';
+import { SharedModule } from './shared/shared/shared.module';
 export function tokenGetter() {
   return localStorage.getItem('jwt');
 }
@@ -39,10 +37,8 @@ export function tokenGetter() {
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
-    HomeComponent,
     UserComponent,
     CategoryComponent,
-    AdminHeaderComponent,
     ViewCategoryComponent,
     EditCategoryComponent,
     AddCategoryComponent,
@@ -55,7 +51,6 @@ export function tokenGetter() {
     OrderComponent,
     OrderDetailComponent,
     ViewOrderComponent,
-    NotFoundComponent,
 
   ],
   imports: [
@@ -64,6 +59,7 @@ export function tokenGetter() {
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+    SharedModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,

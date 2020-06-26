@@ -9,12 +9,12 @@ import { LoginService } from 'src/app/service/login.service';
 })
 export class AdminHeaderComponent implements OnInit {
 
-  constructor(private router:Router,public service:LoginService) { }
+  constructor(private router: Router, public service: LoginService) { }
 
   ngOnInit(): void {
   }
-  signOut() : void {
-    localStorage.setItem("jwt", "");
+  signOut(): void {
+    localStorage.setItem('jwt', '');
     this.router.navigate(['login']);
   }
 }

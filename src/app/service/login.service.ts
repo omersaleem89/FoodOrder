@@ -39,7 +39,7 @@ export class LoginService {
         }
         else {
           this.user.Role = Role.Customer;
-          this.router.navigate(['home']);
+          this.router.navigate(['user/home/category']);
         }
       }).catch(
         response => {

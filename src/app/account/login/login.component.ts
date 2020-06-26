@@ -11,7 +11,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(public service:LoginService) {
+  constructor(public service: LoginService) {
    }
 
   ngOnInit(): void {
@@ -19,16 +19,17 @@ export class LoginComponent implements OnInit {
   }
 
   resetForm(form?: NgForm) {
-    if (form != null)
+    if (form != null) {
       form.form.reset();
+    }
     this.service.formData = {
       Email: '',
       Password: ''
-    }
-  }  
+    };
+  }
   onSubmit(form: NgForm) {
 
     this.service.login();
   }
-  
+
 }

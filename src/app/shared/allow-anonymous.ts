@@ -20,7 +20,7 @@ export class AllowAnonymous implements CanActivate {
         return false;
       }
       else {
-        this.router.navigate(['home']);
+        this.router.navigate(['user/home/category']);
         return false;
       }
     }

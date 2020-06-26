@@ -21,6 +21,12 @@ export class FoodItemService {
       })
     );
   }
+  getCategoryItems(id) {
+
+    this.http.get(this.baseUrl + '/api/FoodItem/GetCategoryItems/' + id)
+      .toPromise()
+      .then(res => this.list = res as FoodItem[]);
+  }
 
   refreshList() {
     this.http.get(this.baseUrl + '/api/FoodItem')
