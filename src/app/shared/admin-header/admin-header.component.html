@@ -1,18 +1,19 @@
-<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+<nav class="navbar navbar-dark sticky-top bg-info flex-md-nowrap p-0">
   <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Food Ordering System</a>
-  <div class="row w-10  justify-content-end">
-    <div *ngIf="this.service.user.Role !== 'Admin'" class="col pr-0">
-      <button type="button" class="btn btn-dark pr-0">
+  <div class="col-md-10 ml-auto d-flex justify-content-end">
+    <div *ngIf="this.service.user.Role !== 'Admin'" class="col-md-8 pr-0 d-flex align-items-center justify-content-end">
+      <a type="button" class="btn btn-info pr-0" [routerLink]="['/user/home/cart']" routerLinkActive="router-link-active" >
         <i class="fa fa-shopping-cart"></i>
-        <span class="badge badge-danger">0</span>
-      </button>
+        <span class="badge badge-danger">{{this.cartService.totalQuantity}}</span>
+      </a>
     </div>
-    <div class="dropdown mr-2 col d-flex align-items-center">
+    <div class="dropdown mr-2 col-md-2 d-flex align-items-center justify-content-end">
       <label class="text-white dropdown-toggle m-0" style="cursor: pointer;" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
         {{this.service.user.Email}}
       </label>
       <div class="dropdown-menu dropdown-menu-right">
+        <a [routerLink]="['/user/home/order/viewOrder']" routerLinkActive="router-link-active"  class="dropdown-item" type="button" *ngIf="this.service.user.Role !== 'Admin'">My Order</a>
         <button class="dropdown-item" type="button" (click)="signOut()">Sign Out</button>
       </div>
     </div>

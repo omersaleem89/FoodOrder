@@ -4,12 +4,15 @@ import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { OrderDetail } from '../model/order-detail.model';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  constructor(private http: HttpClient, @Inject('BASE_API_URL') private baseUrl: string) { }
+  constructor(private http: HttpClient,
+              private loginService: LoginService,
+              @Inject('BASE_API_URL') private baseUrl: string) { }
   list: Order[];
   order: Order;
   orderDetail: OrderDetail[];
@@ -21,9 +24,16 @@ export class OrderService {
   }
 
   refreshList() {
-    this.http.get(this.baseUrl + '/api/Order')
+    if (this.loginService.user.Role === 'Admin') {
+      this.http.get(this.baseUrl + '/api/Order')
+        .toPromise()
+        .then(res => this.list = res as Order[]);
+      }
+    else{
+      this.http.get(this.baseUrl + '/api/Order/GetUserOrder/' + this.loginService.user.UserId)
       .toPromise()
       .then(res => this.list = res as Order[]);
+    }
   }
   getOrder(id): Observable<Order> {
 
@@ -36,12 +46,12 @@ export class OrderService {
   putOrder(id: number){
     const formData = new FormData();
     formData.append('Status', `${this.order.Status}`);
-    formData.append('CreationDate', `${this.order.CreationDate}`);
     formData.append('TransId', `${this.order.TransId}`);
     formData.append('TotalPrice', this.order.TotalPrice.toString());
     formData.append('UserId', this.order.UserId.toString());
     return this.http.put(this.baseUrl + '/api/Order/' + id, formData);
   }
+
 
   updateStatus(id){
     this.getOrder(id).subscribe(

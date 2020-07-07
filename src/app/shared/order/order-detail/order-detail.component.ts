@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { OrderDetail } from 'src/app/model/order-detail.model';
 import { OrderService } from 'src/app/service/order.service';
 import { ActivatedRoute } from '@angular/router';
+import { LoginService } from 'src/app/service/login.service';
 
 @Component({
   selector: 'app-order-detail',
@@ -11,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class OrderDetailComponent implements OnInit {
 
   constructor(public service: OrderService,
+              public loginService: LoginService,
               @Inject('BASE_API_URL') public baseUrl: string,
               private route: ActivatedRoute ) { }
 

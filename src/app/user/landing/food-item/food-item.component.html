@@ -7,9 +7,10 @@
   <h3>{{service.foodItem?.Name}}</h3>
   <h2>Rs. {{service.foodItem?.Price}}/-</h2>
   <p>{{service.foodItem?.Description}}</p>
+  <input type="number" class="form-control" min="1" max="{{service.foodItem?.Quantity}}" value="1" [(ngModel)]="itemQuantity"/>
   <div class="row w-100">
     <div class="col text-right">
-      <button class="btn btn-primary">Add to Cart</button>
+      <button class="btn btn-primary" (click)="addToCart()">Add to Cart</button>
     </div>
     <div class="col">
       <button class="btn btn-danger">Proceed to checkout</button>

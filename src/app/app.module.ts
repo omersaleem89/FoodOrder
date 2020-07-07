@@ -22,9 +22,6 @@ import { ViewFoodItemComponent } from './admin/food-item/view-food-item/view-foo
 import { EditFoodItemComponent } from './admin/food-item/edit-food-item/edit-food-item.component';
 import { DeleteFoodItemComponent } from './admin/food-item/delete-food-item/delete-food-item.component';
 import { AddFoodItemComponent } from './admin/food-item/add-food-item/add-food-item.component';
-import { OrderComponent } from './admin/order/order.component';
-import { OrderDetailComponent } from './admin/order/order-detail/order-detail.component';
-import { ViewOrderComponent } from './admin/order/view-order/view-order.component';
 import { AuthInterceptor } from './shared/auth-interceptor';
 import { SharedModule } from './shared/shared/shared.module';
 export function tokenGetter() {
@@ -47,10 +44,7 @@ export function tokenGetter() {
     ViewFoodItemComponent,
     EditFoodItemComponent,
     DeleteFoodItemComponent,
-    AddFoodItemComponent,
-    OrderComponent,
-    OrderDetailComponent,
-    ViewOrderComponent,
+    AddFoodItemComponent
 
   ],
   imports: [

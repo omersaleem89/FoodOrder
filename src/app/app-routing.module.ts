@@ -17,9 +17,9 @@ import { ViewFoodItemComponent } from './admin/food-item/view-food-item/view-foo
 import { AddFoodItemComponent } from './admin/food-item/add-food-item/add-food-item.component';
 import { EditFoodItemComponent } from './admin/food-item/edit-food-item/edit-food-item.component';
 import { DeleteFoodItemComponent } from './admin/food-item/delete-food-item/delete-food-item.component';
-import { OrderComponent } from './admin/order/order.component';
-import { OrderDetailComponent } from './admin/order/order-detail/order-detail.component';
-import { ViewOrderComponent } from './admin/order/view-order/view-order.component';
+import { OrderComponent } from './shared/order/order.component';
+import { OrderDetailComponent } from './shared/order/order-detail/order-detail.component';
+import { ViewOrderComponent } from './shared/order/view-order/view-order.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [AllowAnonymous] },

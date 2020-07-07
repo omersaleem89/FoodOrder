@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/service/login.service';
+import { CartService } from 'src/app/service/cart.service';
 
 @Component({
   selector: 'app-admin-header',
@@ -9,7 +10,7 @@ import { LoginService } from 'src/app/service/login.service';
 })
 export class AdminHeaderComponent implements OnInit {
 
-  constructor(private router: Router, public service: LoginService) { }
+  constructor(private router: Router, public service: LoginService, public cartService: CartService) { }
 
   ngOnInit(): void {
   }

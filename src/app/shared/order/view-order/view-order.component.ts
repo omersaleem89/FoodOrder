@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { OrderService } from 'src/app/service/order.service';
+import { LoginService } from 'src/app/service/login.service';
 
 @Component({
   selector: 'app-view-order',
@@ -8,7 +9,9 @@ import { OrderService } from 'src/app/service/order.service';
 })
 export class ViewOrderComponent implements OnInit {
 
-  constructor(public service: OrderService, @Inject('BASE_API_URL') public baseUrl: string ) { }
+  constructor(public service: OrderService,
+              public loginService: LoginService,
+              @Inject('BASE_API_URL') public baseUrl: string ) { }
 
   ngOnInit(): void {
     this.service.refreshList();

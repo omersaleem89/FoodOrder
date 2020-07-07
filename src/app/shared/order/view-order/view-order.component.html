@@ -4,10 +4,9 @@
       <tr>
 
         <th class="align-middle text-center">#</th>
-        <th class="align-middle text-center">User</th>
+        <th class="align-middle text-center" *ngIf="loginService.user.Role === 'Admin'">User</th>
         <th class="align-middle text-center">Date</th>
         <th class="align-middle text-center">Price</th>
-        <th class="align-middle text-center">Trans ID</th>
         <th class="align-middle text-center">Status</th>
         <th class="align-middle text-center">Action</th>
       </tr>
@@ -20,20 +19,22 @@
       </tr>
       <tr *ngFor="let o of service.list; let i = index" class="m-0 p-0">
         <td class="align-middle text-center">{{i+1}}</td>
-        <td class="align-middle text-center">{{o.Email}}</td>
+        <td *ngIf="loginService.user.Role === 'Admin'" class="align-middle text-center">{{o.Email}}</td>
         <td class="align-middle text-center">{{o.CreationDate | date: 'MMM d, y'}}</td>
         <td class="align-middle text-center">Rs. {{o.TotalPrice}}/-</td>
-        <td class="align-middle text-center">{{o.TransId}}</td>
         <td *ngIf="o.Status" class="align-middle text-center"><label
             class="badge badge-pill badge-success">Completed</label></td>
         <td *ngIf="!o.Status" class="align-middle text-center"><label
             class="badge badge-pill badge-primary">Pending</label></td>
         <td class="align-middle text-center">
-          <button class="btn btn-danger" routerLink="/dashboard/order/orderDetail/{{o.Id}}"><i
-              class="fa fa-eye"></i> View</button>
-              <button *ngIf="!o.Status" class="btn btn-info ml-2" (click)="updateStatus(o.Id)"><i class="fa fa-edit"></i>
-                Update</button>
-            </td>
+          <button *ngIf="loginService.user.Role === 'Admin'" class="btn btn-danger" routerLink="/dashboard/order/orderDetail/{{o.Id}}"><i class="fa fa-eye"></i>
+            View</button>
+          <button *ngIf="loginService.user.Role !== 'Admin'" class="btn btn-danger" routerLink="/user/home/order/orderDetail/{{o.Id}}"><i class="fa fa-eye"></i>
+            View</button>
+          <button *ngIf="loginService.user.Role === 'Admin' && !o.Status" class="btn btn-info ml-2"
+            (click)="updateStatus(o.Id)"><i class="fa fa-edit"></i>
+            Update</button>
+        </td>
       </tr>
     </tbody>
   </table>
