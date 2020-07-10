@@ -3,6 +3,7 @@ import { Cart } from '../model/cart.model';
 import { LoginService } from './login.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AESEncryptDecryptService } from './aesencrypt-decrypt-service.service';
 interface OrderDetail{
   FoodItemId?: number;
   Quantity?: number;
@@ -20,11 +21,14 @@ export class CartService {
   totalQuantity = 0;
   totalPrice = 0;
   constructor(private loginService: LoginService ,
+              private encService: AESEncryptDecryptService,
               private http: HttpClient
     ,         private router: Router
     ,         @Inject('BASE_API_URL') private baseUrl: string) {
-    this.list = JSON.parse(localStorage.getItem('cart')) as Cart[];
-    if (this.list) {
+    if (localStorage.getItem('cart') !== '' && localStorage.getItem('cart') !== null) {
+      this.list = JSON.parse(this.encService.decrypt(localStorage.getItem('cart'))) as Cart[];
+    }
+    if (this.list ) {
       this.calculateCart();
     }
     else {
@@ -81,7 +85,7 @@ export class CartService {
       }
       this.list.push(tempCart);
     }
-    localStorage.setItem('cart', JSON.stringify(this.list));
+    localStorage.setItem('cart', this.encService.encrypt(JSON.stringify(this.list)));
     this.calculateCart();
     console.log(this.list);
   }
@@ -93,7 +97,7 @@ export class CartService {
     if (index !== -1) {
       this.list.splice(index, 1);
     }
-    localStorage.setItem('cart', JSON.stringify(this.list));
+    localStorage.setItem('cart', this.encService.encrypt(JSON.stringify(this.list)));
     this.calculateCart();
   }
 
@@ -103,7 +107,7 @@ export class CartService {
     });
     if (index !== -1) {
       this.list[index].Quantity = quantity;
-      localStorage.setItem('cart', JSON.stringify(this.list));
+      localStorage.setItem('cart', this.encService.encrypt(JSON.stringify(this.list)));
       this.calculateCart();
     }
   }

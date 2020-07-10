@@ -21,7 +21,7 @@ export class AllowAnonymous implements CanActivate {
     {
       this.Role = this.jwtHelper.decodeToken(token)['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
       this.service.user.Role = this.Role;
-      this.service.user.UserId = parseInt(this.jwtHelper.decodeToken(token)['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']);
+      this.service.user.UserId = parseInt(this.jwtHelper.decodeToken(token)['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'], 0);
       this.service.user.Email = this.jwtHelper.decodeToken(token)['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
       if (this.Role === Role.Admin) {
         this.router.navigate(['dashboard/user']);

@@ -57,6 +57,6 @@
       <div *ngIf="status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
   </div>
   <div class="col-md-6">
-    <img src="{{baseUrl + service.foodItem.Image}}" height="100" width="100" />
+    <img src="{{baseUrl + service.foodItem?.Image}}" height="100" width="100" />
   </div>
 </div>

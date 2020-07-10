@@ -3,7 +3,6 @@ import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LoginService } from '../service/login.service';
 import { CartService } from '../service/cart.service';
-import { Cart } from '../model/cart.model';
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private jwtHelper: JwtHelperService, private router: Router, private login: LoginService, private cartService: CartService
@@ -23,7 +22,7 @@ export class AuthGuard implements CanActivate {
     if (token && !this.jwtHelper.isTokenExpired(token)){
       this.login.user.Role = this.jwtHelper.decodeToken(token)['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
       this.login.user.Email = this.jwtHelper.decodeToken(token)['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
-      this.login.user.UserId = parseInt(this.jwtHelper.decodeToken(token)['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']);
+      this.login.user.UserId = parseInt(this.jwtHelper.decodeToken(token)['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'], 0);
       return true;
     }
 

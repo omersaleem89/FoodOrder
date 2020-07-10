@@ -30,9 +30,10 @@ export class LoginService {
         const token = ( response as any).token;
         localStorage.setItem('jwt', token);
         this.invalidLogin = false;
-        console.log(this.jwtHelper.decodeToken(token));
+        // console.log(this.jwtHelper.decodeToken(token));
         this.user.Email = this.formData.Email;
-        this.user.UserId = parseInt(this.jwtHelper.decodeToken(token)['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']);
+        this.user.UserId = parseInt(this.jwtHelper.decodeToken(token)
+        ['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'], 0);
         this.tempRole = this.jwtHelper.decodeToken(token)['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
         if (this.tempRole === Role.Admin) {
           this.user.Role = Role.Admin;

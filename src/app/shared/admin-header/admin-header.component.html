@@ -1,6 +1,15 @@
 <nav class="navbar navbar-dark sticky-top bg-info flex-md-nowrap p-0">
-  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Food Ordering System</a>
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" [routerLink]="['/login']" routerLinkActive="router-link-active" >Peppers</a>
   <div class="col-md-10 ml-auto d-flex justify-content-end">
+    <div *ngIf="this.service.user.Role === 'Admin'" class="col-md-8 pr-0 d-flex align-items-center justify-content-end">
+      <button *ngIf="signalRService.message !== ''" type="button" class="btn btn-info pr-0"  (click)="viewNotifications()">
+        <i class="fa fa-bell"></i>
+        <span class="badge badge-danger">New</span>
+      </button>
+      <button *ngIf="signalRService.message === ''" type="button" class="btn btn-info pr-0" (click)="viewNotifications()" >
+        <i class="fa fa-bell"></i>
+      </button>
+    </div>
     <div *ngIf="this.service.user.Role !== 'Admin'" class="col-md-8 pr-0 d-flex align-items-center justify-content-end">
       <a type="button" class="btn btn-info pr-0" [routerLink]="['/user/home/cart']" routerLinkActive="router-link-active" >
         <i class="fa fa-shopping-cart"></i>
