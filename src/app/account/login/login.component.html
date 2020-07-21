@@ -1,17 +1,20 @@
 <div>
-<form class="form-signin" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+  <form class="form-signin" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
     <div class="container-fluid">
       <h2 class="form-signin-heading text-center">Login</h2>
       <div *ngIf="service.invalidLogin" class="alert alert-danger">Invalid username or password.</div>
-      <br/>
+      <br />
       <label for="username" class="sr-only">Email address</label>
-      <input type="email" name="Email" #Email="ngModel" [(ngModel)]="service.formData.Email" class="form-control" placeholder="Email" required autofocus>
-      <br/>
+      <input type="email" name="Email" #Email="ngModel" [(ngModel)]="service.formData.Email" class="form-control"
+        placeholder="Email" required autofocus>
+      <br />
       <label for="password" class="sr-only">Password</label>
-      <input type="password" name="Password" #Password="ngModel" [(ngModel)]="service.formData.Password" class="form-control" placeholder="Password" required>
-      <br/>
+      <input type="password" name="Password" #Password="ngModel" [(ngModel)]="service.formData.Password"
+        class="form-control" placeholder="Password" required>
+      <br />
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <br />
+      <a class="btn btn-lg btn-outline-primary btn-block" [routerLink]="['/register']" routerLinkActive="router-link-active"  type="submit">Register</a>
     </div>
   </form>
-  </div>
-  
+</div>

@@ -1,1 +1,33 @@
-<h1>register works!</h1>
+<div>
+  <form class="form-signin" [formGroup]="registerForm" autocomplete="off" (submit)="onSubmit()">
+    <div class="container-fluid">
+      <h2 class="form-signin-heading text-center">Register</h2>
+      <label for="email" class="sr-only">Email address</label>
+      <input type="email" name="Email" formControlName="Email" class="form-control" placeholder="Email" autofocus>
+      <div class="text-danger" *ngIf="registerForm.controls.Email.errors?.required && (registerForm.controls.Email.dirty || registerForm.controls.Email.touched)">
+        Email is required!
+      </div>
+      <div class="text-danger" *ngIf="registerForm.controls.Email.errors?.email && (registerForm.controls.Email.dirty || registerForm.controls.Email.touched)">
+        Enter valid email!
+      </div>
+      <br />
+      <label for="password" class="sr-only">Password</label>
+      <input type="password" name="Password" formControlName="Password" class="form-control" placeholder="Password">
+      <div class="text-danger" *ngIf="registerForm.controls.Password.errors?.required && (registerForm.controls.Password.dirty || registerForm.controls.Password.touched)">
+        Password is required!
+      </div>
+      <br />
+      <label for="password" class="sr-only">Confirm Password</label>
+      <input type="password" name="Password" formControlName="ConfirmPassword" class="form-control" placeholder="Confirm Password">
+      <div class="text-danger" *ngIf="registerForm.controls.ConfirmPassword.errors?.required && (registerForm.controls.ConfirmPassword.dirty || registerForm.controls.ConfirmPassword.touched)">
+        Confirm Password is required!
+      </div>
+      <div class="text-danger" *ngIf="registerForm.hasError('mismatch') && (registerForm.controls.ConfirmPassword.dirty || registerForm.controls.ConfirmPassword.touched)">
+       Password not matched!
+      </div>
+      <br />
+      <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!registerForm.valid">Register</button>
+      <a class="btn btn-lg btn-outline-primary btn-block" [routerLink]="['/login']" routerLinkActive="router-link-active" >Login</a>
+    </div>
+  </form>
+</div>
